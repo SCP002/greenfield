@@ -1,9 +1,9 @@
-import 'components/Field/index.scss';
 import React from 'react';
+import './Field.scss';
 
 interface Props {}
 
-class Field extends React.Component<Props> {
+export default class Field extends React.Component<Props> {
   public constructor(props: Props) {
     super(props);
   }
@@ -12,5 +12,3 @@ class Field extends React.Component<Props> {
     return <div>Field component</div>;
   }
 }
-
-export default Field;
