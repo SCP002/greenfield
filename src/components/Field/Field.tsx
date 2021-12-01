@@ -1,9 +1,11 @@
-import React from 'react';
+import { Component } from 'react';
 import './Field.scss';
 
 interface Props {}
 
-export default class Field extends React.Component<Props> {
+interface State {}
+
+export default class Field extends Component<Props, State> {
   public constructor(props: Props) {
     super(props);
   }
