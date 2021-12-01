@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react';
-import Game from 'components/Game';
+import Game from './Game';
 
-test('Game component renders', () => {
+test('Component renders', () => {
   const { container } = render(<Game />);
   expect(container).toBeInTheDocument();
 });
