@@ -1,4 +1,4 @@
-import 'Game.scss';
+import 'components/Game/index.scss';
 
 function Game() {
   return <div>It's working</div>;
