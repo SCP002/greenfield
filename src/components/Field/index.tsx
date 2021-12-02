@@ -11,6 +11,6 @@ export default class Field extends Component<Props, State> {
   }
 
   public render(): JSX.Element {
-    return <div>Field component</div>;
+    return <div className={Field.name}>Field component</div>;
   }
 }

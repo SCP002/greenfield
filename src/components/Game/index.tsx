@@ -24,8 +24,7 @@ export default class Game extends Component<Props, State> {
 
   public render(): JSX.Element {
     return (
-      <div>
-        Game component
+      <div className={Game.name}>
         <Field />
       </div>
     );
