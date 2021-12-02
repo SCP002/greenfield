@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react';
-import Game from './Game';
+import Field from 'components/Field';
 
 test('Component renders', () => {
-  const { container } = render(<Game />);
+  const { container } = render(<Field />);
   expect(container).toBeInTheDocument();
 });

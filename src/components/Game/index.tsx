@@ -1,6 +1,6 @@
-import Field from 'components/Field/Field';
+import Field from 'components/Field';
+import 'components/Game/styles.scoped.scss';
 import { Component } from 'react';
-import './Game.scss';
 
 interface Props {}
 
@@ -25,7 +25,8 @@ export default class Game extends Component<Props, State> {
   public render(): JSX.Element {
     return (
       <div>
-        <Field></Field>
+        Game component
+        <Field />
       </div>
     );
   }

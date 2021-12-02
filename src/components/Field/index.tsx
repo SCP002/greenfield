@@ -1,5 +1,5 @@
+import 'components/Field/styles.scoped.scss';
 import { Component } from 'react';
-import './Field.scss';
 
 interface Props {}
 
