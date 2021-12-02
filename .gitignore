@@ -5,6 +5,7 @@
 !/.editorconfig
 !/.gitattributes
 !/.gitignore
+!/craco.config.js
 !/package-lock.json
 !/package.json
 !/README.md
