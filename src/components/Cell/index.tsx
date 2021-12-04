@@ -1,16 +1,12 @@
 import 'components/Cell/styles.scoped.scss';
-import { Component } from 'react';
+import React from 'react';
 
-interface Props {}
+interface Props {
+  onClick: (evt: React.MouseEvent) => void;
+}
 
 interface State {}
 
-export class Cell extends Component<Props, State> {
-  public constructor(props: Props) {
-    super(props);
-  }
-
-  public render(): JSX.Element {
-    return <div className={Cell.name}>Cell component</div>;
-  }
+export function Cell(props: Props): JSX.Element {
+  return <button className={Cell.name} onClick={props.onClick} />;
 }

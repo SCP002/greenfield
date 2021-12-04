@@ -2,7 +2,7 @@ import { Field as FieldComp } from 'components/Field';
 import { Field } from 'components/Game/Field';
 import { Row } from 'components/Game/Row';
 import 'components/Game/styles.scoped.scss';
-import { Component } from 'react';
+import React from 'react';
 
 interface Props {}
 
@@ -14,7 +14,7 @@ interface State {
   stepsAmount: number;
 }
 
-export class Game extends Component<Props, State> {
+export class Game extends React.Component<Props, State> {
   public constructor(props: Props) {
     super(props);
 
@@ -39,9 +39,13 @@ export class Game extends Component<Props, State> {
   public render(): JSX.Element {
     return (
       <div className={Game.name}>
-        <FieldComp />
+        <FieldComp onClick={this.handeClick} />
       </div>
     );
+  }
+
+  private handeClick(evt: React.MouseEvent) {
+    console.log('Handle click!'); // TODO: Remove
   }
 
   private resetSteps() {

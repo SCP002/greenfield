@@ -1,16 +1,17 @@
+import { Cell } from 'components/Cell';
 import 'components/Field/styles.scoped.scss';
-import { Component } from 'react';
+import React from 'react';
 
-interface Props {}
+interface Props {
+  onClick: (evt: React.MouseEvent) => void;
+}
 
 interface State {}
 
-export class Field extends Component<Props, State> {
-  public constructor(props: Props) {
-    super(props);
-  }
-
-  public render(): JSX.Element {
-    return <div className={Field.name}>Field component</div>;
-  }
+export function Field(props: Props): JSX.Element {
+  return (
+    <div className={Field.name}>
+      <Cell onClick={props.onClick} />
+    </div>
+  );
 }
