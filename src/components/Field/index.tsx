@@ -5,7 +5,7 @@ interface Props {}
 
 interface State {}
 
-export default class Field extends Component<Props, State> {
+export class Field extends Component<Props, State> {
   public constructor(props: Props) {
     super(props);
   }

@@ -1,4 +1,4 @@
-import Game from 'components/Game';
+import { Game } from 'components/Game';
 import 'index.scss';
 import React from 'react';
 import ReactDOM from 'react-dom';
