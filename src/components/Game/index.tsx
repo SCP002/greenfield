@@ -23,7 +23,7 @@ export class Game extends React.Component<Props, State> {
     this.state = {
       changeClickedCell: false,
       columns: cols,
-      field: Field.New(rows, cols),
+      field: Field.New(cols, rows),
       rows: rows,
       stepsAmount: 0,
     };
@@ -39,7 +39,11 @@ export class Game extends React.Component<Props, State> {
   public render(): JSX.Element {
     return (
       <div className={Game.name}>
-        <FieldComp onClick={this.handeClick} />
+        <FieldComp
+          columns={this.state.columns}
+          rows={this.state.rows}
+          onClick={this.handeClick}
+        />
       </div>
     );
   }

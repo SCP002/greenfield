@@ -3,8 +3,8 @@ import { Row } from 'components/Game/Row';
 
 export namespace Field {
   export function New(
-    rowAmount: number,
-    colAmount: number
+    colAmount: number,
+    rowAmount: number
   ): ReadonlyArray<Row> {
     const cells = Array<Cell>(colAmount);
     cells.fill(Cell.New());
