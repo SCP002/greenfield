@@ -1,8 +1,11 @@
 import { Game } from 'components/Game';
+import { enableAllPlugins } from 'immer';
 import 'index.scss';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import reportWebVitals from 'reportWebVitals';
+
+enableAllPlugins();
 
 ReactDOM.render(
   <React.StrictMode>
