@@ -5,8 +5,6 @@ interface Props {
   onClick: (evt: React.MouseEvent) => void;
 }
 
-interface State {}
-
 export function Cell(props: Props): JSX.Element {
   return <button className={Cell.name} onClick={props.onClick} />;
 }
