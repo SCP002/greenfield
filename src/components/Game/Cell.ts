@@ -1,3 +1,5 @@
+import produce from 'immer';
+
 export interface Cell {
   readonly active: boolean;
 }
@@ -8,8 +10,8 @@ export namespace Cell {
   }
 
   export function revertState(cell: Cell): Cell {
-    const c = { ...cell };
-    c.active = !c.active;
-    return c;
+    return produce(cell, (c) => {
+      c.active = !c.active;
+    });
   }
 }
