@@ -3,7 +3,7 @@ import { FieldComp } from 'components/FieldComp';
 
 test('Component renders', () => {
   const { container } = render(
-    <FieldComp columns={0} rows={0} onClick={() => {}} />
+    <FieldComp colAmount={0} rowAmount={0} onClick={() => {}} />
   );
   expect(container).toBeInTheDocument();
 });

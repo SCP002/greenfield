@@ -1,31 +1,33 @@
 import { CellComp } from 'components/CellComp';
 import 'components/Field/styles.scoped.scss';
-import { times } from 'lodash';
-import React from 'react';
+import { Field } from 'components/FieldComp/Field';
+import React, { useState } from 'react';
 
 interface Props {
-  columns: number;
-  rows: number;
+  colAmount: number;
+  rowAmount: number;
   onClick: (evt: React.MouseEvent) => void;
 }
 
 export function FieldComp(props: Props): JSX.Element {
+  const [rows, setRows] = useState(Field.New(props.colAmount, props.rowAmount));
+
   return (
     <div className={FieldComp.name}>
       <table>
-        <tbody>{renderRows(props.columns, props.rows)}</tbody>
+        <tbody>{renderRows()}</tbody>
       </table>
     </div>
   );
 
-  function renderRows(colAmount: number, rowAmount: number): JSX.Element[] {
-    return times(rowAmount, (rowIdx) => {
+  function renderRows(): JSX.Element[] {
+    return rows.map((row, rowIdx) => {
       return (
         <tr key={rowIdx}>
-          {times(colAmount, (colIdx) => {
+          {row.cells.map((cell, cellIdx) => {
             return (
-              <td key={colIdx}>
-                <CellComp key={colIdx} onClick={props.onClick} />
+              <td key={cellIdx}>
+                <CellComp key={cellIdx} onClick={props.onClick} />
               </td>
             );
           })}

@@ -1,4 +1,4 @@
-import { Cell } from 'components/GameComp/Cell';
+import { Cell } from 'components/FieldComp/Cell';
 
 export interface Row {
   readonly cells: ReadonlyArray<Cell>;

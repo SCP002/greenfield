@@ -1,6 +1,6 @@
 import { FieldComp } from 'components/FieldComp';
-import { Field } from 'components/GameComp/Field';
-import { Row } from 'components/GameComp/Row';
+import { Field } from 'components/FieldComp/Field';
+import { Row } from 'components/FieldComp/Row';
 import 'components/Game/styles.scoped.scss';
 import React from 'react';
 
@@ -8,9 +8,9 @@ interface Props {}
 
 interface State {
   changeClickedCell: boolean;
-  columns: number;
+  colAmount: number;
   field?: ReadonlyArray<Row>;
-  rows: number;
+  rowAmount: number;
   stepsAmount: number;
 }
 
@@ -18,13 +18,13 @@ export class GameComp extends React.Component<Props, State> {
   public constructor(props: Props) {
     super(props);
 
-    const cols = 6;
-    const rows = 1;
+    const colAmount = 6;
+    const rowAmount = 1;
     this.state = {
       changeClickedCell: false,
-      columns: cols,
-      field: Field.New(cols, rows),
-      rows: rows,
+      colAmount: colAmount,
+      field: Field.New(colAmount, rowAmount),
+      rowAmount: rowAmount,
       stepsAmount: 0,
     };
   }
@@ -33,15 +33,15 @@ export class GameComp extends React.Component<Props, State> {
     prevProps: Readonly<Props>,
     prevState: Readonly<State>
   ) {
-    console.log(prevState); // TODO: Remove; Update Field on columns / rows change
+    console.log(prevState); // TODO: Remove; Update Field on colAmount / rowAmount change
   }
 
   public render(): JSX.Element {
     return (
       <div className={GameComp.name}>
         <FieldComp
-          columns={this.state.columns}
-          rows={this.state.rows}
+          colAmount={this.state.colAmount}
+          rowAmount={this.state.rowAmount}
           onClick={this.handeClick}
         />
       </div>
