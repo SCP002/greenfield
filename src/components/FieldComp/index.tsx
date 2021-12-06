@@ -1,12 +1,12 @@
 import { CellComp } from 'components/CellComp';
 import 'components/Field/styles.scoped.scss';
 import { Field } from 'components/FieldComp/Field';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 interface Props {
   colAmount: number;
   rowAmount: number;
-  onClick: (evt: React.MouseEvent) => void;
+  onClick: () => void;
 }
 
 export function FieldComp(props: Props): JSX.Element {

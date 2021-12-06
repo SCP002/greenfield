@@ -1,8 +1,7 @@
 import 'components/Cell/styles.scoped.scss';
-import React from 'react';
 
 interface Props {
-  onClick: (evt: React.MouseEvent) => void;
+  onClick: () => void;
 }
 
 export function CellComp(props: Props): JSX.Element {

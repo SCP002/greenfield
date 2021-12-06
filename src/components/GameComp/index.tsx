@@ -1,6 +1,4 @@
 import { FieldComp } from 'components/FieldComp';
-import { Field } from 'components/FieldComp/Field';
-import { Row } from 'components/FieldComp/Row';
 import 'components/Game/styles.scoped.scss';
 import React from 'react';
 
@@ -9,7 +7,6 @@ interface Props {}
 interface State {
   changeClickedCell: boolean;
   colAmount: number;
-  field?: ReadonlyArray<Row>;
   rowAmount: number;
   stepsAmount: number;
 }
@@ -23,7 +20,6 @@ export class GameComp extends React.Component<Props, State> {
     this.state = {
       changeClickedCell: false,
       colAmount: colAmount,
-      field: Field.New(colAmount, rowAmount),
       rowAmount: rowAmount,
       stepsAmount: 0,
     };
@@ -48,7 +44,7 @@ export class GameComp extends React.Component<Props, State> {
     );
   }
 
-  private handeClick(evt: React.MouseEvent) {
+  private handeClick() {
     console.log('Handle click!'); // TODO: Remove
   }
 
