@@ -1,7 +1,7 @@
 import { CellComp } from 'components/CellComp';
-import 'components/FieldComp/styles.scoped.scss';
 import { Field } from 'components/FieldComp/Field';
-import { useState } from 'react';
+import 'components/FieldComp/styles.scoped.scss';
+import { useImmer } from 'use-immer';
 
 interface Props {
   colAmount: number;
@@ -10,7 +10,7 @@ interface Props {
 }
 
 export function FieldComp(props: Props): JSX.Element {
-  const [rows, setRows] = useState(Field.New(props.colAmount, props.rowAmount));
+  const [rows, setRows] = useImmer(Field.New(props.colAmount, props.rowAmount));
 
   return (
     <div className={FieldComp.name}>
