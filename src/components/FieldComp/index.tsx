@@ -1,5 +1,5 @@
 import { CellComp } from 'components/CellComp';
-import 'components/Field/styles.scoped.scss';
+import 'components/FieldComp/styles.scoped.scss';
 import { Field } from 'components/FieldComp/Field';
 import { useState } from 'react';
 
@@ -27,7 +27,11 @@ export function FieldComp(props: Props): JSX.Element {
           {row.cells.map((cell, cellIdx) => {
             return (
               <td key={cellIdx}>
-                <CellComp key={cellIdx} onClick={props.onClick} />
+                <CellComp
+                  key={cellIdx}
+                  isActive={cell.initialActive}
+                  onClick={props.onClick}
+                />
               </td>
             );
           })}

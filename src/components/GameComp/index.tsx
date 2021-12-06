@@ -1,5 +1,5 @@
 import { FieldComp } from 'components/FieldComp';
-import 'components/Game/styles.scoped.scss';
+import 'components/GameComp/styles.scoped.scss';
 import React from 'react';
 
 interface Props {}
