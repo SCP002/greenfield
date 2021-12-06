@@ -1,6 +1,7 @@
 import { FieldComp } from 'components/FieldComp';
 import 'components/GameComp/styles.scoped.scss';
-import React from 'react';
+import { useEffect } from 'react';
+import { useImmer } from 'use-immer';
 
 interface Props {}
 
@@ -11,46 +12,35 @@ interface State {
   stepsAmount: number;
 }
 
-export class GameComp extends React.Component<Props, State> {
-  public constructor(props: Props) {
-    super(props);
+export function GameComp(props: Props): JSX.Element {
+  const [state, setState] = useImmer<State>({
+    changeClickedCell: false,
+    colAmount: 6,
+    rowAmount: 1,
+    stepsAmount: 0,
+  });
 
-    const colAmount = 6;
-    const rowAmount = 1;
-    this.state = {
-      changeClickedCell: false,
-      colAmount: colAmount,
-      rowAmount: rowAmount,
-      stepsAmount: 0,
-    };
-  }
+  useEffect(() => {
+    console.log(state); // TODO: Remove; Update Field on colAmount / rowAmount change
+  }, [state]);
 
-  public componentDidUpdate(
-    prevProps: Readonly<Props>,
-    prevState: Readonly<State>
-  ) {
-    console.log(prevState); // TODO: Remove; Update Field on colAmount / rowAmount change
-  }
+  return (
+    <div className={GameComp.name}>
+      <FieldComp
+        colAmount={state.colAmount}
+        rowAmount={state.rowAmount}
+        onClick={handeClick}
+      />
+    </div>
+  );
 
-  public render(): JSX.Element {
-    return (
-      <div className={GameComp.name}>
-        <FieldComp
-          colAmount={this.state.colAmount}
-          rowAmount={this.state.rowAmount}
-          onClick={this.handeClick}
-        />
-      </div>
-    );
-  }
-
-  private handeClick() {
+  function handeClick() {
     console.log('Handle click!'); // TODO: Remove
   }
 
-  private resetSteps() {
-    this.setState({
-      stepsAmount: 0,
+  function resetSteps() {
+    setState((s) => {
+      s.stepsAmount = 0;
     });
   }
 }
