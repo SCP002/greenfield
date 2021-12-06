@@ -1,4 +1,4 @@
-import { Cell } from 'components/Cell';
+import { CellComp } from 'components/CellComp';
 import 'components/Field/styles.scoped.scss';
 import { times } from 'lodash';
 import React from 'react';
@@ -9,9 +9,9 @@ interface Props {
   onClick: (evt: React.MouseEvent) => void;
 }
 
-export function Field(props: Props): JSX.Element {
+export function FieldComp(props: Props): JSX.Element {
   return (
-    <div className={Field.name}>
+    <div className={FieldComp.name}>
       <table>
         <tbody>{renderRows(props.columns, props.rows)}</tbody>
       </table>
@@ -25,7 +25,7 @@ export function Field(props: Props): JSX.Element {
           {times(colAmount, (colIdx) => {
             return (
               <td key={colIdx}>
-                <Cell key={colIdx} onClick={props.onClick} />
+                <CellComp key={colIdx} onClick={props.onClick} />
               </td>
             );
           })}

@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react';
-import Game from 'components/Game';
+import { CellComp } from 'components/CellComp';
 
 test('Component renders', () => {
-  const { container } = render(<Game />);
+  const { container } = render(<CellComp onClick={() => {}} />);
   expect(container).toBeInTheDocument();
 });

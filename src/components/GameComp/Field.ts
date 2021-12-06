@@ -1,5 +1,5 @@
-import { Cell } from 'components/Game/Cell';
-import { Row } from 'components/Game/Row';
+import { Cell } from 'components/GameComp/Cell';
+import { Row } from 'components/GameComp/Row';
 
 export namespace Field {
   export function New(

@@ -1,6 +1,6 @@
-import { Field as FieldComp } from 'components/Field';
-import { Field } from 'components/Game/Field';
-import { Row } from 'components/Game/Row';
+import { FieldComp } from 'components/FieldComp';
+import { Field } from 'components/GameComp/Field';
+import { Row } from 'components/GameComp/Row';
 import 'components/Game/styles.scoped.scss';
 import React from 'react';
 
@@ -14,7 +14,7 @@ interface State {
   stepsAmount: number;
 }
 
-export class Game extends React.Component<Props, State> {
+export class GameComp extends React.Component<Props, State> {
   public constructor(props: Props) {
     super(props);
 
@@ -38,7 +38,7 @@ export class Game extends React.Component<Props, State> {
 
   public render(): JSX.Element {
     return (
-      <div className={Game.name}>
+      <div className={GameComp.name}>
         <FieldComp
           columns={this.state.columns}
           rows={this.state.rows}

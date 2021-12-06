@@ -1,4 +1,4 @@
-import { Game } from 'components/Game';
+import { GameComp } from 'components/GameComp';
 import { enableAllPlugins } from 'immer';
 import 'index.scss';
 import React from 'react';
@@ -9,7 +9,7 @@ enableAllPlugins();
 
 ReactDOM.render(
   <React.StrictMode>
-    <Game />
+    <GameComp />
   </React.StrictMode>,
   document.getElementById('root')
 );

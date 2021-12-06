@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react';
-import Cell from 'components/Cell';
+import { GameComp } from 'components/GameComp';
 
 test('Component renders', () => {
-  const { container } = render(<Cell />);
+  const { container } = render(<GameComp />);
   expect(container).toBeInTheDocument();
 });
