@@ -13,7 +13,7 @@ interface State {
 }
 
 export function GameComp(props: Props): JSX.Element {
-  const [state, setState] = useImmer<State>({
+  const [state, updateState] = useImmer<State>({
     changeClickedCell: false,
     colAmount: 6,
     rowAmount: 1,
@@ -26,15 +26,12 @@ export function GameComp(props: Props): JSX.Element {
 
   return (
     <div className={GameComp.name}>
-      <FieldComp
-        colAmount={state.colAmount}
-        rowAmount={state.rowAmount}
-      />
+      <FieldComp colAmount={state.colAmount} rowAmount={state.rowAmount} />
     </div>
   );
 
   function resetSteps() {
-    setState((s) => {
+    updateState((s) => {
       s.stepsAmount = 0;
     });
   }
