@@ -14,4 +14,26 @@ export namespace Field {
 
     return rows;
   }
+
+  export function revertAreaState(
+    rows: Row[],
+    cellIdx: number,
+    rowIdx: number
+  ) {
+    revertCellState(rows, cellIdx - 1, rowIdx);
+    revertCellState(rows, cellIdx + 1, rowIdx);
+    revertCellState(rows, cellIdx, rowIdx - 1);
+    revertCellState(rows, cellIdx, rowIdx + 1);
+  }
+
+  function revertCellState(rows: Row[], cellIdx: number, rowIdx: number) {
+    if (
+      rowIdx >= 0 &&
+      cellIdx >= 0 &&
+      rowIdx < rows.length &&
+      cellIdx < rows[rowIdx].cells.length
+    ) {
+      Cell.revertState(rows[rowIdx].cells[cellIdx]);
+    }
+  }
 }

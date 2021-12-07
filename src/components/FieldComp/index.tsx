@@ -1,5 +1,4 @@
 import { CellComp } from 'components/CellComp';
-import { Cell } from 'components/FieldComp/Cell';
 import { Field } from 'components/FieldComp/Field';
 import 'components/FieldComp/styles.scoped.scss';
 import { useImmer } from 'use-immer';
@@ -24,7 +23,7 @@ export function FieldComp(props: Props): JSX.Element {
 
   function onCellClick(rowIdx: number, cellIdx: number) {
     updateRows((rows) => {
-      Cell.revertState(rows[rowIdx].cells[cellIdx]);
+      Field.revertAreaState(rows, cellIdx, rowIdx);
     });
   }
 
