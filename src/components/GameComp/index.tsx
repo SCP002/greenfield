@@ -29,14 +29,9 @@ export function GameComp(props: Props): JSX.Element {
       <FieldComp
         colAmount={state.colAmount}
         rowAmount={state.rowAmount}
-        onClick={handeClick}
       />
     </div>
   );
-
-  function handeClick() {
-    console.log('Handle click!'); // TODO: Remove
-  }
 
   function resetSteps() {
     setState((s) => {

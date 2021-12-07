@@ -6,7 +6,6 @@ import { useImmer } from 'use-immer';
 interface Props {
   colAmount: number;
   rowAmount: number;
-  onClick: () => void;
 }
 
 export function FieldComp(props: Props): JSX.Element {
@@ -20,6 +19,10 @@ export function FieldComp(props: Props): JSX.Element {
     </div>
   );
 
+  function onCellClick(rowIdx: number, cellIdx: number) {
+    console.log('clicked', rowIdx, cellIdx);
+  }
+
   function renderRows(): JSX.Element[] {
     return rows.map((row, rowIdx) => {
       return (
@@ -30,7 +33,9 @@ export function FieldComp(props: Props): JSX.Element {
                 <CellComp
                   key={cellIdx}
                   isActive={cell.initialActive}
-                  onClick={props.onClick}
+                  onClick={() => {
+                    onCellClick(rowIdx, cellIdx);
+                  }}
                 />
               </td>
             );
