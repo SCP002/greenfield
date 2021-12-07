@@ -1,9 +1,13 @@
 export interface Cell {
-  readonly initialActive: boolean;
+  active: boolean;
 }
 
 export namespace Cell {
   export function New(): Cell {
-    return { initialActive: Math.random() >= 0.5 };
+    return { active: Math.random() >= 0.5 };
+  }
+
+  export function revertState(c: Cell) {
+    c.active = !c.active;
   }
 }

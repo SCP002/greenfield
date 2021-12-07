@@ -1,7 +1,7 @@
 import { Cell } from 'components/FieldComp/Cell';
 
 export interface Row {
-  readonly cells: ReadonlyArray<Cell>;
+  cells: Cell[];
 }
 
 export namespace Row {
