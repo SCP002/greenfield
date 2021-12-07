@@ -1,4 +1,5 @@
 import { CellComp } from 'components/CellComp';
+import { Cell } from 'components/FieldComp/Cell';
 import { Field } from 'components/FieldComp/Field';
 import 'components/FieldComp/styles.scoped.scss';
 import { useImmer } from 'use-immer';
@@ -9,7 +10,9 @@ interface Props {
 }
 
 export function FieldComp(props: Props): JSX.Element {
-  const [rows, setRows] = useImmer(Field.New(props.colAmount, props.rowAmount));
+  const [rows, updateRows] = useImmer(
+    Field.New(props.colAmount, props.rowAmount)
+  );
 
   return (
     <div className={FieldComp.name}>
@@ -20,7 +23,9 @@ export function FieldComp(props: Props): JSX.Element {
   );
 
   function onCellClick(rowIdx: number, cellIdx: number) {
-    console.log('clicked', rowIdx, cellIdx);
+    updateRows((rows) => {
+      Cell.revertState(rows[rowIdx].cells[cellIdx]);
+    });
   }
 
   function renderRows(): JSX.Element[] {
@@ -32,7 +37,7 @@ export function FieldComp(props: Props): JSX.Element {
               <td key={cellIdx}>
                 <CellComp
                   key={cellIdx}
-                  isActive={cell.initialActive}
+                  isActive={cell.active}
                   onClick={() => {
                     onCellClick(rowIdx, cellIdx);
                   }}
