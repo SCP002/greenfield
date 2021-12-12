@@ -1,7 +1,6 @@
 import { FieldComp } from 'components/FieldComp';
 import 'components/GameComp/styles.scoped.scss';
 import { MenuComp } from 'components/MenuComp';
-import { useEffect } from 'react';
 import { useImmer } from 'use-immer';
 
 interface Props {}
@@ -20,10 +19,6 @@ export function GameComp(props: Props): JSX.Element {
     rowAmount: 1,
     stepsAmount: 0,
   });
-
-  useEffect(() => {
-    console.log(state); // TODO: Remove; Update Field on colAmount / rowAmount change
-  }, [state]);
 
   return (
     <div className={GameComp.name}>
