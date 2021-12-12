@@ -39,7 +39,7 @@ export function MenuComp(props: Props): JSX.Element {
             step="1"
             value={props.rowAmount}
             onChange={(evt) => {
-              props.onRowAmount(parseInt(evt.target.value));
+              props.onRowAmount(evt.target.valueAsNumber);
             }}
           />
         </label>
@@ -52,7 +52,7 @@ export function MenuComp(props: Props): JSX.Element {
             step="1"
             value={props.colAmount}
             onChange={(evt) => {
-              props.onColAmount(parseInt(evt.target.value));
+              props.onColAmount(evt.target.valueAsNumber);
             }}
           />
         </label>
