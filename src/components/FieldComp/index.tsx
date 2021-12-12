@@ -1,6 +1,8 @@
 import { CellComp } from 'components/CellComp';
 import { Field } from 'components/FieldComp/Field';
+import { Row } from 'components/FieldComp/Row';
 import 'components/FieldComp/styles.scoped.scss';
+import { useEffect } from 'react';
 import { useImmer } from 'use-immer';
 
 interface Props {
@@ -8,10 +10,20 @@ interface Props {
   rowAmount: number;
 }
 
+interface State {
+  rows: Row[];
+}
+
 export function FieldComp(props: Props): JSX.Element {
-  const [rows, updateRows] = useImmer(
-    Field.New(props.colAmount, props.rowAmount)
-  );
+  const [state, updateState] = useImmer<State>({
+    rows: Field.New(props.colAmount, props.rowAmount),
+  });
+
+  useEffect(() => {
+    updateState((draft) => {
+      draft.rows = Field.New(props.colAmount, props.rowAmount);
+    });
+  }, [props, updateState]);
 
   return (
     <div className={FieldComp.name}>
@@ -22,13 +34,13 @@ export function FieldComp(props: Props): JSX.Element {
   );
 
   function onCellClick(rowIdx: number, cellIdx: number) {
-    updateRows((rows) => {
-      Field.revertAreaState(rows, cellIdx, rowIdx);
+    updateState((draft) => {
+      Field.revertAreaState(draft.rows, cellIdx, rowIdx);
     });
   }
 
   function renderRows(): JSX.Element[] {
-    return rows.map((row, rowIdx) => {
+    return state.rows.map((row, rowIdx) => {
       return (
         <tr key={rowIdx}>
           {row.cells.map((cell, cellIdx) => {
