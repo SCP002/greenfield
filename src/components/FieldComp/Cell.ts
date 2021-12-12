@@ -1,4 +1,4 @@
-export interface Cell {
+export interface Cell { // TODO: Not interface?
   active: boolean;
 }
 

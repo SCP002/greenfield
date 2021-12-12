@@ -3,7 +3,7 @@ import { Row } from 'components/FieldComp/Row';
 import lo from 'lodash';
 
 export namespace Field {
-  export function New(colAmount: number, rowAmount: number): Row[] {
+  export function New(colAmount: number, rowAmount: number): Row[] { // TODO: Generating duplicates?
     const cells = lo.map(Array(colAmount), () => {
       return Cell.New();
     });
