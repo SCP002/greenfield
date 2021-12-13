@@ -3,16 +3,14 @@ import { Row } from 'components/FieldComp/Row';
 import lo from 'lodash';
 
 export namespace Field {
-  export function New(colAmount: number, rowAmount: number): Row[] { // TODO: Generating duplicates?
-    const cells = lo.map(Array(colAmount), () => {
-      return Cell.New();
+  export function New(colAmount: number, rowAmount: number): Row[] {
+    return lo.map(Array(rowAmount), () => {
+      return Row.New(
+        lo.map(Array(colAmount), () => {
+          return Cell.New();
+        })
+      );
     });
-
-    const rows = lo.map(Array(rowAmount), () => {
-      return Row.New(cells);
-    });
-
-    return rows;
   }
 
   export function revertAreaState(
