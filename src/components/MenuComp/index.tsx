@@ -8,6 +8,8 @@ interface Props {
   onFlipTargetCell: (v: boolean) => void;
   onColAmount: (v: number) => void;
   onRowAmount: (v: number) => void;
+  onMouseDown: () => void;
+  onMouseUp: () => void;
   onRandomize: () => void;
 }
 
@@ -54,6 +56,8 @@ export function MenuComp(props: Props): JSX.Element {
             onChange={(evt) => {
               props.onColAmount(evt.target.valueAsNumber);
             }}
+            onMouseDown={props.onMouseDown}
+            onMouseUp={props.onMouseUp}
           />
         </label>
       </div>

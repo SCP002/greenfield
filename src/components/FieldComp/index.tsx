@@ -8,6 +8,7 @@ import { useImmer } from 'use-immer';
 interface Props {
   colAmount: number;
   rowAmount: number;
+  colUpdateLock: boolean;
 }
 
 interface State {
@@ -20,6 +21,9 @@ export function FieldComp(props: Props): JSX.Element {
   });
 
   useEffect(() => {
+    if (props.colUpdateLock) {
+      return;
+    }
     updateState((draft) => {
       draft.rows = Field.New(props.colAmount, props.rowAmount);
     });

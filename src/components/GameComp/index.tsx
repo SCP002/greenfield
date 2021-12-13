@@ -10,6 +10,7 @@ interface State {
   colAmount: number;
   rowAmount: number;
   stepsAmount: number;
+  colUpdateLock: boolean;
 }
 
 export function GameComp(props: Props): JSX.Element {
@@ -18,11 +19,16 @@ export function GameComp(props: Props): JSX.Element {
     colAmount: 6,
     rowAmount: 1,
     stepsAmount: 0,
+    colUpdateLock: false,
   });
 
   return (
     <div className={GameComp.name}>
-      <FieldComp colAmount={state.colAmount} rowAmount={state.rowAmount} />
+      <FieldComp
+        colAmount={state.colAmount}
+        rowAmount={state.rowAmount}
+        colUpdateLock={state.colUpdateLock}
+      />
       <MenuComp
         flipTargetCell={state.flipTargetCell}
         colAmount={state.colAmount}
@@ -41,6 +47,16 @@ export function GameComp(props: Props): JSX.Element {
         onRowAmount={(v) => {
           updateState((s) => {
             s.rowAmount = v;
+          });
+        }}
+        onMouseDown={() => {
+          updateState((s) => {
+            s.colUpdateLock = true;
+          });
+        }}
+        onMouseUp={() => {
+          updateState((s) => {
+            s.colUpdateLock = false;
           });
         }}
         onRandomize={() => {
