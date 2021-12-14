@@ -16,12 +16,25 @@ export namespace Field {
   export function revertAreaState(
     rows: Row[],
     cellIdx: number,
-    rowIdx: number
+    rowIdx: number,
+    flipTargetCell: boolean
   ) {
+    if (flipTargetCell) {
+      revertCellState(rows, cellIdx, rowIdx);
+    }
+
     revertCellState(rows, cellIdx - 1, rowIdx);
     revertCellState(rows, cellIdx + 1, rowIdx);
     revertCellState(rows, cellIdx, rowIdx - 1);
     revertCellState(rows, cellIdx, rowIdx + 1);
+  }
+
+  export function isWin(rows: Row[]): boolean {
+    return rows.every((row) => {
+      return row.cells.every((cell) => {
+        return cell.active;
+      });
+    });
   }
 
   function revertCellState(rows: Row[], cellIdx: number, rowIdx: number) {

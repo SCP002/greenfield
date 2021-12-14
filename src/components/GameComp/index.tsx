@@ -3,6 +3,10 @@ import 'components/GameComp/styles.scoped.scss';
 import { MenuComp } from 'components/MenuComp';
 import { useImmer } from 'use-immer';
 
+// FIXME: Click on columns amount resets the game field
+// TODO: Increment steps amount
+// TODO: Win message
+
 interface Props {}
 
 interface State {
@@ -25,6 +29,7 @@ export function GameComp(props: Props): JSX.Element {
   return (
     <div className={GameComp.name}>
       <FieldComp
+        flipTargetCell={state.flipTargetCell}
         colAmount={state.colAmount}
         rowAmount={state.rowAmount}
         colUpdateLock={state.colUpdateLock}
@@ -61,13 +66,13 @@ export function GameComp(props: Props): JSX.Element {
         }}
         onRandomize={() => {
           console.log('onRandomize()');
-          // TODO: This
+          // TODO: Randomize button
         }}
       />
     </div>
   );
 
-  function resetSteps() {
+  function resetSteps() { // TODO: Step reset
     updateState((s) => {
       s.stepsAmount = 0;
     });

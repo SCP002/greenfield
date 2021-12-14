@@ -6,6 +6,7 @@ import { useEffect } from 'react';
 import { useImmer } from 'use-immer';
 
 interface Props {
+  flipTargetCell: boolean;
   colAmount: number;
   rowAmount: number;
   colUpdateLock: boolean;
@@ -39,7 +40,7 @@ export function FieldComp(props: Props): JSX.Element {
 
   function onCellClick(rowIdx: number, cellIdx: number) {
     updateState((draft) => {
-      Field.revertAreaState(draft.rows, cellIdx, rowIdx);
+      Field.revertAreaState(draft.rows, cellIdx, rowIdx, props.flipTargetCell);
     });
   }
 
