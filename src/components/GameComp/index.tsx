@@ -3,7 +3,7 @@ import 'components/GameComp/styles.scoped.scss';
 import { MenuComp } from 'components/MenuComp';
 import { useImmer } from 'use-immer';
 
-// FIXME: Click on columns amount resets the game field
+// FIXME: Click on columns amount resets the game field (move field to game component?)
 // TODO: Increment steps amount
 // TODO: Win message
 
