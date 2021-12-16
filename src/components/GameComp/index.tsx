@@ -3,11 +3,14 @@ import { Field } from 'components/GameComp/Field';
 import { Row } from 'components/GameComp/Row';
 import 'components/GameComp/styles.scoped.scss';
 import { MenuComp } from 'components/MenuComp';
+import { WritableDraft } from 'immer/dist/internal';
 import { useEffect } from 'react';
-import { useImmer } from 'use-immer';
+import { useImmerReducer } from 'use-immer';
 
 // FIXME: Click on columns amount resets the game field
+// FIXME: Win displays only on second click
 // TODO: Increment steps amount
+// TODO: Step reset
 
 interface Props {}
 
@@ -20,30 +23,78 @@ interface State {
   rows: Row[];
 }
 
+type Action =
+  | { type: 'colAmount'; v: number }
+  | { type: 'rowAmount'; v: number }
+  | { type: 'flipTargetCell'; v: boolean }
+  | { type: 'addStep' }
+  | { type: 'resetSteps' }
+  | { type: 'colUpdateLock'; v: boolean }
+  | { type: 'newField' }
+  | { type: 'revertAreaState'; cellIdx: number; rowIdx: number };
+
+const initialState: State = {
+  flipTargetCell: false,
+  colAmount: 6,
+  rowAmount: 1,
+  stepsAmount: 0,
+  colUpdateLock: false,
+  rows: [],
+};
+
+function reducer(draft: WritableDraft<State>, action: Action) {
+  switch (action.type) {
+    case 'colAmount':
+      draft.colAmount = action.v;
+      break;
+    case 'rowAmount':
+      draft.rowAmount = action.v;
+      break;
+    case 'flipTargetCell':
+      draft.flipTargetCell = action.v;
+      break;
+    case 'addStep':
+      draft.stepsAmount++;
+      break;
+    case 'resetSteps':
+      draft.stepsAmount = 0;
+      break;
+    case 'colUpdateLock':
+      draft.colUpdateLock = action.v;
+      break;
+    case 'newField':
+      draft.rows = Field.New(draft.colAmount, draft.rowAmount);
+      break;
+    case 'revertAreaState':
+      console.log('dispatching revertAreaState'); // TODO: Remove
+      Field.revertAreaState(
+        draft.rows,
+        action.cellIdx,
+        action.rowIdx,
+        draft.flipTargetCell
+      );
+      break;
+  }
+}
+
 export function GameComp(props: Props): JSX.Element {
-  const [state, updateState] = useImmer<State>({
-    flipTargetCell: false,
-    colAmount: 6,
-    rowAmount: 1,
-    stepsAmount: 0,
-    colUpdateLock: false,
-    rows: [],
-  });
+  const [state, dispatch] = useImmerReducer<State, Action>(
+    reducer,
+    initialState
+  );
 
   useEffect(() => {
     if (state.colUpdateLock) {
       return;
     }
-    updateState((draft) => {
-      draft.rows = Field.New(draft.colAmount, draft.rowAmount);
-    });
+    dispatch({ type: 'newField' });
   }, [
     state.flipTargetCell,
     state.colAmount,
     state.rowAmount,
     state.stepsAmount,
     state.colUpdateLock,
-    updateState,
+    dispatch,
   ]);
 
   return (
@@ -55,29 +106,19 @@ export function GameComp(props: Props): JSX.Element {
         rowAmount={state.rowAmount}
         stepsAmount={state.stepsAmount}
         onFlipTargetCell={(v) => {
-          updateState((s) => {
-            s.flipTargetCell = v;
-          });
+          dispatch({ type: 'flipTargetCell', v: v });
         }}
         onColAmount={(v) => {
-          updateState((s) => {
-            s.colAmount = v;
-          });
+          dispatch({ type: 'colAmount', v: v });
         }}
         onRowAmount={(v) => {
-          updateState((s) => {
-            s.rowAmount = v;
-          });
+          dispatch({ type: 'rowAmount', v: v });
         }}
         onMouseDown={() => {
-          updateState((s) => {
-            s.colUpdateLock = true;
-          });
+          dispatch({ type: 'colUpdateLock', v: true });
         }}
         onMouseUp={() => {
-          updateState((s) => {
-            s.colUpdateLock = false;
-          });
+          dispatch({ type: 'colUpdateLock', v: false });
         }}
         onRandomize={() => {
           console.log('onRandomize()');
@@ -88,19 +129,10 @@ export function GameComp(props: Props): JSX.Element {
   );
 
   function onCellClick(rowIdx: number, cellIdx: number) {
-    updateState((draft) => {
-      Field.revertAreaState(draft.rows, cellIdx, rowIdx, draft.flipTargetCell);
-    });
+    dispatch({ type: 'revertAreaState', cellIdx: cellIdx, rowIdx: rowIdx });
+    console.log('Starting isWin check'); // TODO: Remove
     if (Field.isWin(state.rows)) {
-      // FIXME: Displays only on second click
       window.alert(`You won in ${state.stepsAmount} steps!`);
     }
-  }
-
-  function resetSteps() {
-    // TODO: Step reset
-    updateState((s) => {
-      s.stepsAmount = 0;
-    });
   }
 }
