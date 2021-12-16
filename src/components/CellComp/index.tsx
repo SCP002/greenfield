@@ -2,7 +2,7 @@ import 'components/CellComp/styles.scoped.scss';
 
 interface Props {
   isActive: boolean;
-  onClick: (rowIdx?: number, cellIdx?: number) => void;
+  onClick: (cellIdx?: number, rowIdx?: number) => void;
 }
 
 export function CellComp(props: Props): JSX.Element {

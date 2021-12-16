@@ -4,7 +4,7 @@ import { Row } from 'components/GameComp/Row';
 
 interface Props {
   rows: Row[];
-  onCellClick: (rowIdx: number, cellIdx: number) => void;
+  onCellClick: (cellIdx: number, rowIdx: number) => void;
 }
 
 export function FieldComp(props: Props): JSX.Element {
@@ -27,7 +27,7 @@ export function FieldComp(props: Props): JSX.Element {
                   key={'cell' + cellIdx + rowIdx}
                   isActive={cell.active}
                   onClick={() => {
-                    props.onCellClick(rowIdx, cellIdx);
+                    props.onCellClick(cellIdx, rowIdx);
                   }}
                 />
               </td>
