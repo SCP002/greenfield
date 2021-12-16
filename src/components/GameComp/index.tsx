@@ -8,7 +8,6 @@ import { useImmer } from 'use-immer';
 
 // FIXME: Click on columns amount resets the game field
 // TODO: Increment steps amount
-// TODO: Win message
 
 interface Props {}
 
@@ -36,7 +35,7 @@ export function GameComp(props: Props): JSX.Element {
       return;
     }
     updateState((draft) => {
-      draft.rows = Field.New(state.colAmount, state.rowAmount);
+      draft.rows = Field.New(draft.colAmount, draft.rowAmount);
     });
   }, [
     state.flipTargetCell,
@@ -92,6 +91,10 @@ export function GameComp(props: Props): JSX.Element {
     updateState((draft) => {
       Field.revertAreaState(draft.rows, cellIdx, rowIdx, draft.flipTargetCell);
     });
+    if (Field.isWin(state.rows)) {
+      // FIXME: Displays only on second click
+      window.alert(`You won in ${state.stepsAmount} steps!`);
+    }
   }
 
   function resetSteps() {
