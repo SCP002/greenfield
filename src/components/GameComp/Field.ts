@@ -1,5 +1,5 @@
-import { Cell } from 'components/FieldComp/Cell';
-import { Row } from 'components/FieldComp/Row';
+import { Cell } from 'components/GameComp/Cell';
+import { Row } from 'components/GameComp/Row';
 import lo from 'lodash';
 
 export namespace Field {

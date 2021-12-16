@@ -1,4 +1,4 @@
-import { Cell } from 'components/FieldComp/Cell';
+import { Cell } from 'components/GameComp/Cell';
 
 export interface Row {
   cells: Cell[];
