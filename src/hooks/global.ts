@@ -8,5 +8,6 @@ export const useEffectNoFirst = (func: Function, deps: any[]) => {
       return;
     }
     func();
+    // eslint-disable-next-line
   }, deps);
 };
