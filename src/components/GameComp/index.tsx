@@ -3,18 +3,19 @@ import { Field } from 'components/GameComp/Field';
 import { Row } from 'components/GameComp/Row';
 import 'components/GameComp/styles.scoped.scss';
 import { MenuComp } from 'components/MenuComp';
+import { useEffectNoFirst } from 'hooks/global';
 import { WritableDraft } from 'immer/dist/internal';
 import { useEffect } from 'react';
 import { useImmerReducer } from 'use-immer';
 
 // FIXME: Click on columns amount resets the game field (colUpdateLock triggers render)
-// FIXME: Win check happens before dispatch (mobx)
 // TODO: Calculate colAmount and rowAmount from Row[]
 // TODO: State to type or Action to interface?
 // TODO: Check if still need useEffect?
 // TODO: Pass dispatch
 // TODO: Increment steps amount
 // TODO: Step reset
+// TODO: Try mobx
 
 interface Props {}
 
@@ -100,6 +101,12 @@ export function GameComp(props: Props): JSX.Element {
     dispatch,
   ]);
 
+  useEffectNoFirst(() => {
+    if (Field.isWin(state.rows)) {
+      window.alert(`You won in ${state.stepsAmount} steps!`);
+    }
+  }, [state.rows, state.stepsAmount]);
+
   return (
     <div className={GameComp.name}>
       <FieldComp rows={state.rows} onCellClick={onCellClick} />
@@ -132,8 +139,5 @@ export function GameComp(props: Props): JSX.Element {
 
   function onCellClick(cellIdx: number, rowIdx: number) {
     dispatch({ type: 'revertAreaState', cellIdx: cellIdx, rowIdx: rowIdx });
-    if (Field.isWin(state.rows)) {
-      window.alert(`You won in ${state.stepsAmount} steps!`);
-    }
   }
 }
