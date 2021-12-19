@@ -8,7 +8,8 @@ import { useEffect } from 'react';
 import { useImmerReducer } from 'use-immer';
 
 // FIXME: Click on columns amount resets the game field (colUpdateLock triggers render)
-// FIXME: Win check happens before dispatch
+// FIXME: Win check happens before dispatch (mobx)
+// TODO: Calculate colAmount and rowAmount from Row[]
 // TODO: State to type or Action to interface?
 // TODO: Check if still need useEffect?
 // TODO: Pass dispatch
