@@ -1,11 +1,17 @@
 import { GameComp } from 'components/GameComp';
-import { enableAllPlugins } from 'immer';
 import 'index.scss';
+import { configure } from 'mobx';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import reportWebVitals from 'reportWebVitals';
 
-enableAllPlugins();
+configure({
+  enforceActions: 'always',
+  computedRequiresReaction: true,
+  reactionRequiresObservable: true,
+  observableRequiresReaction: true,
+  disableErrorBoundaries: true,
+});
 
 ReactDOM.render(
   <React.StrictMode>

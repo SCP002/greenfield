@@ -1,0 +1,65 @@
+import lo from 'lodash';
+import { action, makeObservable, observable } from 'mobx';
+import { Cell } from 'store/Cell';
+import { Row } from 'store/Row';
+
+export class Field {
+  rows: Row[] = [];
+
+  constructor(colAmount: number, rowAmount: number) {
+    makeObservable(
+      this,
+      {
+        rows: observable,
+        init: action,
+        invertAreaState: action,
+        isWin: action,
+        invertCellState: action,
+      },
+      { name: Field.name }
+    );
+
+    this.init(colAmount, rowAmount);
+  }
+
+  init(colAmount: number, rowAmount: number) {
+    this.rows = lo.map(Array(rowAmount), () => {
+      return new Row(
+        lo.map(Array(colAmount), () => {
+          return new Cell();
+        })
+      );
+    });
+  }
+
+  invertAreaState(cellIdx: number, rowIdx: number, flipTargetCell: boolean) {
+    if (flipTargetCell) {
+      this.invertCellState(cellIdx, rowIdx);
+    }
+
+    this.invertCellState(cellIdx - 1, rowIdx);
+    this.invertCellState(cellIdx + 1, rowIdx);
+    this.invertCellState(cellIdx, rowIdx - 1);
+    this.invertCellState(cellIdx, rowIdx + 1);
+  }
+
+  isWin(): boolean {
+    return this.rows.every((row) => {
+      return row.cells.every((cell) => {
+        return cell.active;
+      });
+    });
+  }
+
+  // TODO: Private somehow
+  invertCellState(cellIdx: number, rowIdx: number) {
+    if (
+      rowIdx >= 0 &&
+      cellIdx >= 0 &&
+      rowIdx < this.rows.length &&
+      cellIdx < this.rows[rowIdx].cells.length
+    ) {
+      this.rows[rowIdx].cells[cellIdx].invert();
+    }
+  }
+}

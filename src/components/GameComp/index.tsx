@@ -1,143 +1,54 @@
 import { FieldComp } from 'components/FieldComp';
-import { Field } from 'components/GameComp/Field';
-import { Row } from 'components/GameComp/Row';
 import 'components/GameComp/styles.scoped.scss';
 import { MenuComp } from 'components/MenuComp';
-import { useEffectNoFirst } from 'hooks/global';
-import { WritableDraft } from 'immer/dist/internal';
-import { useEffect } from 'react';
-import { useImmerReducer } from 'use-immer';
+import { observer } from 'mobx-react-lite';
+import { game } from 'store/GameStore';
 
-// FIXME: Click on columns amount resets the game field (colUpdateLock triggers render)
-// TODO: Calculate colAmount and rowAmount from Row[]
-// TODO: State to type or Action to interface?
-// TODO: Check if still need useEffect?
-// TODO: Pass dispatch
+// FIXME: Columns won't work with arrow key
 // TODO: Increment steps amount
 // TODO: Step reset
-// TODO: Try mobx
+// TODO: makeAutoObservable
 
-interface Props {}
-
-interface State {
-  rows: Row[];
-  colAmount: number;
-  rowAmount: number;
-  stepsAmount: number;
-  flipTargetCell: boolean;
-  colUpdateLock: boolean;
-}
-
-type Action =
-  | { type: 'newField' }
-  | { type: 'revertAreaState'; cellIdx: number; rowIdx: number }
-  | { type: 'colAmount'; v: number }
-  | { type: 'rowAmount'; v: number }
-  | { type: 'addStep' }
-  | { type: 'resetSteps' }
-  | { type: 'flipTargetCell'; v: boolean }
-  | { type: 'colUpdateLock'; v: boolean };
-
-const initialState: State = {
-  rows: [],
-  colAmount: 6,
-  rowAmount: 1,
-  stepsAmount: 0,
-  flipTargetCell: false,
-  colUpdateLock: false,
-};
-
-function reducer(draft: WritableDraft<State>, action: Action) {
-  switch (action.type) {
-    case 'newField':
-      draft.rows = Field.New(draft.colAmount, draft.rowAmount);
-      break;
-    case 'revertAreaState':
-      Field.revertAreaState(
-        draft.rows,
-        action.cellIdx,
-        action.rowIdx,
-        draft.flipTargetCell
-      );
-      break;
-    case 'colAmount':
-      draft.colAmount = action.v;
-      break;
-    case 'rowAmount':
-      draft.rowAmount = action.v;
-      break;
-    case 'addStep':
-      draft.stepsAmount++;
-      break;
-    case 'resetSteps':
-      draft.stepsAmount = 0;
-      break;
-    case 'flipTargetCell':
-      draft.flipTargetCell = action.v;
-      break;
-    case 'colUpdateLock':
-      draft.colUpdateLock = action.v;
-      break;
-  }
-}
-
-export function GameComp(props: Props): JSX.Element {
-  const [state, dispatch] = useImmerReducer<State, Action>(
-    reducer,
-    initialState
-  );
-
-  useEffect(() => {
-    if (state.colUpdateLock) {
-      return;
-    }
-    dispatch({ type: 'newField' });
-  }, [
-    state.colAmount,
-    state.rowAmount,
-    state.stepsAmount,
-    state.flipTargetCell,
-    state.colUpdateLock,
-    dispatch,
-  ]);
-
-  useEffectNoFirst(() => {
-    if (Field.isWin(state.rows)) {
-      window.alert(`You won in ${state.stepsAmount} steps!`);
-    }
-  }, [state.rows, state.stepsAmount]);
-
+export const GameComp = observer(() => {
   return (
-    <div className={GameComp.name}>
-      <FieldComp rows={state.rows} onCellClick={onCellClick} />
+    <div className={'GameComp'}>
+      <FieldComp
+        rows={game.field.rows}
+        onCellClick={(cellIdx: number, rowIdx: number) => {
+          game.field.invertAreaState(cellIdx, rowIdx, game.flipTargetCell);
+          if (game.field.isWin()) {
+            window.alert(`You won in ${game.stepsAmount} steps!`);
+          }
+        }}
+      />
       <MenuComp
-        colAmount={state.colAmount}
-        rowAmount={state.rowAmount}
-        stepsAmount={state.stepsAmount}
-        flipTargetCell={state.flipTargetCell}
+        colAmount={game.colAmount}
+        rowAmount={game.rowAmount}
+        stepsAmount={game.stepsAmount}
+        flipTargetCell={game.flipTargetCell}
         onColAmount={(v) => {
-          dispatch({ type: 'colAmount', v: v });
+          game.setColAmount(v);
         }}
         onRowAmount={(v) => {
-          dispatch({ type: 'rowAmount', v: v });
+          game.setRowAmount(v);
+          game.field.init(game.colAmount, game.rowAmount);
         }}
         onFlipTargetCell={(v) => {
-          dispatch({ type: 'flipTargetCell', v: v });
+          game.setFlipTargetCell(v);
         }}
-        onMouseDown={() => {
-          dispatch({ type: 'colUpdateLock', v: true });
+        onColMouseDown={() => {
+          game.setPrevColAmount(game.colAmount);
         }}
-        onMouseUp={() => {
-          dispatch({ type: 'colUpdateLock', v: false });
+        onColMouseUp={() => {
+          if (game.colAmount === game.prevColAmount) {
+            return;
+          }
+          game.field.init(game.colAmount, game.rowAmount);
         }}
         onRandomize={() => {
-          dispatch({ type: 'newField' });
+          game.field.init(game.colAmount, game.rowAmount);
         }}
       />
     </div>
   );
-
-  function onCellClick(cellIdx: number, rowIdx: number) {
-    dispatch({ type: 'revertAreaState', cellIdx: cellIdx, rowIdx: rowIdx });
-  }
-}
+});

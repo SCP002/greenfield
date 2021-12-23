@@ -1,15 +1,16 @@
 import { CellComp } from 'components/CellComp';
 import 'components/FieldComp/styles.scoped.scss';
-import { Row } from 'components/GameComp/Row';
+import { observer } from 'mobx-react-lite';
+import { Row } from 'store/Row';
 
 interface Props {
   rows: Row[];
   onCellClick: (cellIdx: number, rowIdx: number) => void;
 }
 
-export function FieldComp(props: Props): JSX.Element {
+export const FieldComp = observer((props: Props) => {
   return (
-    <div className={FieldComp.name}>
+    <div className={'FieldComp'}>
       <table>
         <tbody>{renderRows()}</tbody>
       </table>
@@ -37,4 +38,4 @@ export function FieldComp(props: Props): JSX.Element {
       );
     });
   }
-}
+});

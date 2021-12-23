@@ -1,4 +1,5 @@
 import 'components/MenuComp/styles.scoped.scss';
+import { observer } from 'mobx-react-lite';
 
 interface Props {
   flipTargetCell: boolean;
@@ -8,12 +9,12 @@ interface Props {
   onFlipTargetCell: (v: boolean) => void;
   onColAmount: (v: number) => void;
   onRowAmount: (v: number) => void;
-  onMouseDown: () => void;
-  onMouseUp: () => void;
+  onColMouseDown: () => void;
+  onColMouseUp: () => void;
   onRandomize: () => void;
 }
 
-export function MenuComp(props: Props): JSX.Element {
+export const MenuComp = observer((props: Props) => {
   function showAbout() {
     window.alert(
       'Small puzzle game.\n' +
@@ -23,7 +24,7 @@ export function MenuComp(props: Props): JSX.Element {
   }
 
   return (
-    <div className={MenuComp.name}>
+    <div className={'MenuComp'}>
       <div>
         <p>steps counter: {props.stepsAmount}</p>
       </div>
@@ -56,8 +57,8 @@ export function MenuComp(props: Props): JSX.Element {
             onChange={(evt) => {
               props.onColAmount(evt.target.valueAsNumber);
             }}
-            onMouseDown={props.onMouseDown}
-            onMouseUp={props.onMouseUp}
+            onMouseDown={props.onColMouseDown}
+            onMouseUp={props.onColMouseUp}
           />
         </label>
       </div>
@@ -84,4 +85,4 @@ export function MenuComp(props: Props): JSX.Element {
       </div>
     </div>
   );
-}
+});
