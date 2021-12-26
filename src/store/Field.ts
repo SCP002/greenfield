@@ -4,24 +4,14 @@ import { Cell } from 'store/Cell';
 import { Row } from 'store/Row';
 
 export class Field {
-  rows: Row[] = [];
+  @observable rows: Row[] = [];
 
   constructor(colAmount: number, rowAmount: number) {
-    makeObservable(
-      this,
-      {
-        rows: observable,
-        init: action,
-        invertAreaState: action,
-        isWin: action,
-        invertCellState: action,
-      },
-      { name: Field.name }
-    );
-
+    makeObservable(this);
     this.init(colAmount, rowAmount);
   }
 
+  @action
   init(colAmount: number, rowAmount: number) {
     this.rows = lo.map(Array(rowAmount), () => {
       return new Row(
@@ -32,6 +22,7 @@ export class Field {
     });
   }
 
+  @action
   invertAreaState(cellIdx: number, rowIdx: number, flipTargetCell: boolean) {
     if (flipTargetCell) {
       this.invertCellState(cellIdx, rowIdx);
@@ -51,8 +42,8 @@ export class Field {
     });
   }
 
-  // TODO: Private somehow
-  invertCellState(cellIdx: number, rowIdx: number) {
+  @action
+  private invertCellState(cellIdx: number, rowIdx: number) {
     if (
       rowIdx >= 0 &&
       cellIdx >= 0 &&
