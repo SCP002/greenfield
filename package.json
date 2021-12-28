@@ -47,6 +47,9 @@
     ]
   },
   "devDependencies": {
-    "@types/lodash": "^4.14.177"
+    "@types/lodash": "^4.14.177",
+    "@typescript-eslint/parser": "^4.33.0",
+    "eslint": "^7.32.0",
+    "eslint-plugin-mobx": "^0.0.7"
   }
 }
