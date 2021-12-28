@@ -1,4 +1,4 @@
-import { Cell } from 'store/Cell';
+import { Cell } from 'stores/Cell';
 
 export class Row {
   cells: Cell[];

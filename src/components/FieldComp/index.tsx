@@ -1,7 +1,7 @@
 import { CellComp } from 'components/CellComp';
 import 'components/FieldComp/styles.scoped.scss';
 import { observer } from 'mobx-react-lite';
-import { Row } from 'store/Row';
+import { Row } from 'stores/Row';
 
 interface Props {
   rows: Row[];

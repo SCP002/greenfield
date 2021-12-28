@@ -4,6 +4,7 @@ import { configure } from 'mobx';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import reportWebVitals from 'reportWebVitals';
+import { GameStore } from 'stores/GameStore';
 
 configure({
   enforceActions: 'always',
@@ -13,9 +14,16 @@ configure({
   disableErrorBoundaries: true,
 });
 
+const rootStore = {
+  game: new GameStore(),
+};
+export const StoresContext = React.createContext(rootStore);
+
 ReactDOM.render(
   <React.StrictMode>
-    <GameComp />
+    <StoresContext.Provider value={rootStore}>
+      <GameComp />
+    </StoresContext.Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );

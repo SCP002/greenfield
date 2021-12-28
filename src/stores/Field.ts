@@ -1,7 +1,7 @@
 import lo from 'lodash';
 import { action, makeObservable, observable } from 'mobx';
-import { Cell } from 'store/Cell';
-import { Row } from 'store/Row';
+import { Cell } from 'stores/Cell';
+import { Row } from 'stores/Row';
 
 export class Field {
   @observable rows: Row[] = [];

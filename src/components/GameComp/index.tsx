@@ -1,8 +1,9 @@
 import { FieldComp } from 'components/FieldComp';
 import 'components/GameComp/styles.scoped.scss';
 import { MenuComp } from 'components/MenuComp';
+import { StoresContext } from 'index';
 import { observer } from 'mobx-react-lite';
-import { game } from 'store/GameStore';
+import { useContext } from 'react';
 
 // FIXME: Columns won't work with arrow key
 // TODO: Reaction on colAmount / rowAmount
@@ -10,6 +11,8 @@ import { game } from 'store/GameStore';
 // TODO: Step reset
 
 export const GameComp = observer(function GameComp() {
+  const game = useContext(StoresContext).game;
+
   return (
     <div className={GameComp.name}>
       <FieldComp

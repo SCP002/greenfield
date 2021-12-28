@@ -1,5 +1,5 @@
 import { action, makeObservable, observable } from 'mobx';
-import { Field } from 'store/Field';
+import { Field } from 'stores/Field';
 
 export class GameStore {
   @observable prevColAmount = 0;
@@ -43,5 +43,3 @@ export class GameStore {
     this.stepsAmount = 0;
   }
 }
-
-export const game = new GameStore();
