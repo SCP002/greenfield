@@ -8,9 +8,9 @@ interface Props {
   onCellClick: (cellIdx: number, rowIdx: number) => void;
 }
 
-export const FieldComp = observer((props: Props) => {
+export const FieldComp = observer(function FieldComp(props: Props) {
   return (
-    <div className={'FieldComp'}>
+    <div className={FieldComp.name}>
       <table>
         <tbody>{renderRows()}</tbody>
       </table>

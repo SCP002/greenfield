@@ -6,10 +6,10 @@ interface Props {
   onClick: (cellIdx?: number, rowIdx?: number) => void;
 }
 
-export const CellComp = observer((props: Props) => {
+export const CellComp = observer(function CellComp(props: Props) {
   return (
     <button
-      className={`CellComp ${props.isActive ? 'active' : ''}`}
+      className={`${CellComp.name} ${props.isActive ? 'active' : ''}`}
       onClick={() => {
         props.onClick();
       }}

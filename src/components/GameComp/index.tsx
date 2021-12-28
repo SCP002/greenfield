@@ -5,13 +5,13 @@ import { observer } from 'mobx-react-lite';
 import { game } from 'store/GameStore';
 
 // FIXME: Columns won't work with arrow key
+// TODO: Reaction on colAmount / rowAmount
 // TODO: Increment steps amount
 // TODO: Step reset
-// TODO: makeAutoObservable
 
-export const GameComp = observer(() => {
+export const GameComp = observer(function GameComp() {
   return (
-    <div className={'GameComp'}>
+    <div className={GameComp.name}>
       <FieldComp
         rows={game.field.rows}
         onCellClick={(cellIdx: number, rowIdx: number) => {

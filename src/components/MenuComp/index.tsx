@@ -14,7 +14,7 @@ interface Props {
   onRandomize: () => void;
 }
 
-export const MenuComp = observer((props: Props) => {
+export const MenuComp = observer(function MenuComp(props: Props) {
   function showAbout() {
     window.alert(
       'Small puzzle game.\n' +
@@ -24,7 +24,7 @@ export const MenuComp = observer((props: Props) => {
   }
 
   return (
-    <div className={'MenuComp'}>
+    <div className={MenuComp.name}>
       <div>
         <p>steps counter: {props.stepsAmount}</p>
       </div>
