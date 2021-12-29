@@ -13,11 +13,7 @@ export const GameComp = observer(function GameComp() {
       <FieldComp
         rows={game.field.rows}
         onCellClick={(cellIdx: number, rowIdx: number) => {
-          game.field.invertAreaState(cellIdx, rowIdx, game.flipTargetCell);
-          game.addStep();
-          if (game.field.isWin()) {
-            window.alert(`You won in ${game.stepsAmount} steps!`);
-          }
+          game.handleCellClick(cellIdx, rowIdx);
         }}
       />
       <MenuComp

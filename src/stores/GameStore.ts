@@ -42,4 +42,13 @@ export class GameStore {
   resetSteps() {
     this.stepsAmount = 0;
   }
+
+  @action
+  handleCellClick(cellIdx: number, rowIdx: number) {
+    this.field.invertAreaState(cellIdx, rowIdx, this.flipTargetCell);
+    this.addStep();
+    if (this.field.isWin()) {
+      window.alert(`You won in ${this.stepsAmount} steps!`);
+    }
+  }
 }
