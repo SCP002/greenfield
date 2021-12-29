@@ -1,4 +1,4 @@
-import 'components/CellComp/styles.scoped.scss';
+import 'components/CellComp/CellComp.scoped.scss';
 import { observer } from 'mobx-react-lite';
 
 interface Props {

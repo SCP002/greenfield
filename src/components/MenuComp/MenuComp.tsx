@@ -1,4 +1,4 @@
-import 'components/MenuComp/styles.scoped.scss';
+import 'components/MenuComp/MenuComp.scoped.scss';
 import { observer } from 'mobx-react-lite';
 
 interface Props {

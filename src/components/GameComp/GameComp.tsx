@@ -1,6 +1,6 @@
-import { FieldComp } from 'components/FieldComp';
-import 'components/GameComp/styles.scoped.scss';
-import { MenuComp } from 'components/MenuComp';
+import { FieldComp } from 'components/FieldComp/FieldComp';
+import 'components/GameComp/GameComp.scoped.scss';
+import { MenuComp } from 'components/MenuComp/MenuComp';
 import { StoresContext } from 'index';
 import { observer } from 'mobx-react-lite';
 import { useContext } from 'react';

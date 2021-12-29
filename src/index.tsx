@@ -1,4 +1,4 @@
-import { GameComp } from 'components/GameComp';
+import { GameComp } from 'components/GameComp/GameComp';
 import 'index.scss';
 import { configure } from 'mobx';
 import React from 'react';
