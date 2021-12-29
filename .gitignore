@@ -3,6 +3,7 @@
 
 # Not these files
 !/.editorconfig
+!/.eslintrc.js
 !/.gitattributes
 !/.gitignore
 !/craco.config.js
