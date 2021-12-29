@@ -5,11 +5,6 @@ import { StoresContext } from 'index';
 import { observer } from 'mobx-react-lite';
 import { useContext } from 'react';
 
-// FIXME: Columns won't work with arrow key
-// TODO: Reaction on colAmount / rowAmount
-// TODO: Increment steps amount
-// TODO: Step reset
-
 export const GameComp = observer(function GameComp() {
   const game = useContext(StoresContext).game;
 
@@ -19,6 +14,7 @@ export const GameComp = observer(function GameComp() {
         rows={game.field.rows}
         onCellClick={(cellIdx: number, rowIdx: number) => {
           game.field.invertAreaState(cellIdx, rowIdx, game.flipTargetCell);
+          game.addStep();
           if (game.field.isWin()) {
             window.alert(`You won in ${game.stepsAmount} steps!`);
           }
@@ -35,21 +31,26 @@ export const GameComp = observer(function GameComp() {
         onRowAmount={(v) => {
           game.setRowAmount(v);
           game.field.init(game.colAmount, game.rowAmount);
+          game.resetSteps();
         }}
         onFlipTargetCell={(v) => {
           game.setFlipTargetCell(v);
+          game.field.init(game.colAmount, game.rowAmount);
+          game.resetSteps();
         }}
-        onColMouseDown={() => {
+        onColCtrlDown={() => {
           game.setPrevColAmount(game.colAmount);
         }}
-        onColMouseUp={() => {
+        onColCtrlUp={() => {
           if (game.colAmount === game.prevColAmount) {
             return;
           }
           game.field.init(game.colAmount, game.rowAmount);
+          game.resetSteps();
         }}
         onRandomize={() => {
           game.field.init(game.colAmount, game.rowAmount);
+          game.resetSteps();
         }}
       />
     </div>

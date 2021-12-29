@@ -9,8 +9,8 @@ interface Props {
   onFlipTargetCell: (v: boolean) => void;
   onColAmount: (v: number) => void;
   onRowAmount: (v: number) => void;
-  onColMouseDown: () => void;
-  onColMouseUp: () => void;
+  onColCtrlDown: () => void;
+  onColCtrlUp: () => void;
   onRandomize: () => void;
 }
 
@@ -21,6 +21,10 @@ export const MenuComp = observer(function MenuComp(props: Props) {
         'To win, mark all cells green.\n' +
         'Click on the cell will revert colors of all neighbors except for diagonals.'
     );
+  }
+
+  function isArrowEvent(evt: React.KeyboardEvent) {
+    return evt.key.startsWith('Arrow');
   }
 
   return (
@@ -57,8 +61,18 @@ export const MenuComp = observer(function MenuComp(props: Props) {
             onChange={(evt) => {
               props.onColAmount(evt.target.valueAsNumber);
             }}
-            onMouseDown={props.onColMouseDown}
-            onMouseUp={props.onColMouseUp}
+            onMouseDown={props.onColCtrlDown}
+            onMouseUp={props.onColCtrlUp}
+            onKeyDown={(evt) => {
+              if (isArrowEvent(evt)) {
+                props.onColCtrlDown();
+              }
+            }}
+            onKeyUp={(evt) => {
+              if (isArrowEvent(evt)) {
+                props.onColCtrlUp();
+              }
+            }}
           />
         </label>
       </div>
