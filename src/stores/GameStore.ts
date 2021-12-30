@@ -7,7 +7,8 @@ export class GameStore {
   @observable rowAmount = 1;
   @observable flipTargetCell = false;
   @observable stepsAmount = 0;
-  @observable field = new Field(this.colAmount, this.rowAmount);
+
+  field = new Field(this.colAmount, this.rowAmount);
 
   constructor() {
     makeObservable(this);
