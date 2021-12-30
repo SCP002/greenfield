@@ -24,6 +24,8 @@ export class GameStore {
     this.stepsAmount++;
     if (this.field.isWin()) {
       window.alert(`You won in ${this.stepsAmount} steps!`);
+      this.field.init(this.colAmount, this.rowAmount);
+      this.stepsAmount = 0;
     }
   }
 
