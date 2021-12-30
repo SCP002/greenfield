@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/greenfield/static/css/main.875f8c5a.chunk.css",
+    "main.js": "/greenfield/static/js/main.eccd7e1b.chunk.js",
+    "main.js.map": "/greenfield/static/js/main.eccd7e1b.chunk.js.map",
+    "runtime-main.js": "/greenfield/static/js/runtime-main.a3f191cd.js",
+    "runtime-main.js.map": "/greenfield/static/js/runtime-main.a3f191cd.js.map",
+    "static/js/2.e6d64f45.chunk.js": "/greenfield/static/js/2.e6d64f45.chunk.js",
+    "static/js/2.e6d64f45.chunk.js.map": "/greenfield/static/js/2.e6d64f45.chunk.js.map",
+    "static/js/3.0e5fbc7a.chunk.js": "/greenfield/static/js/3.0e5fbc7a.chunk.js",
+    "static/js/3.0e5fbc7a.chunk.js.map": "/greenfield/static/js/3.0e5fbc7a.chunk.js.map",
+    "index.html": "/greenfield/index.html",
+    "static/css/main.875f8c5a.chunk.css.map": "/greenfield/static/css/main.875f8c5a.chunk.css.map",
+    "static/js/2.e6d64f45.chunk.js.LICENSE.txt": "/greenfield/static/js/2.e6d64f45.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.a3f191cd.js",
+    "static/js/2.e6d64f45.chunk.js",
+    "static/css/main.875f8c5a.chunk.css",
+    "static/js/main.eccd7e1b.chunk.js"
+  ]
+}
