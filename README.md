@@ -1,6 +1,7 @@
 # Greenfield
 
 > Small react + mobx based puzzle game.
+<https://scp002.github.io/greenfield/>
 
 ## Game rules
 
