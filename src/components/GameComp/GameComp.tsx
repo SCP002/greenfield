@@ -10,12 +10,7 @@ export const GameComp = observer(function GameComp() {
 
   return (
     <div className={GameComp.name}>
-      <FieldComp
-        rows={game.field.rows}
-        onCellClick={(cellIdx: number, rowIdx: number) => {
-          game.onCellClick(cellIdx, rowIdx);
-        }}
-      />
+      <FieldComp />
       <MenuComp
         colAmount={game.colAmount}
         rowAmount={game.rowAmount}

@@ -1,14 +1,12 @@
 import { CellComp } from 'components/CellComp/CellComp';
 import 'components/FieldComp/FieldComp.scoped.scss';
+import { StoresContext } from 'index';
 import { observer } from 'mobx-react-lite';
-import { Row } from 'stores/Row';
+import { useContext } from 'react';
 
-interface Props {
-  rows: Row[];
-  onCellClick: (cellIdx: number, rowIdx: number) => void;
-}
+export const FieldComp = observer(function FieldComp() {
+  const game = useContext(StoresContext).game;
 
-export const FieldComp = observer(function FieldComp(props: Props) {
   return (
     <div className={FieldComp.name}>
       <table>
@@ -18,7 +16,7 @@ export const FieldComp = observer(function FieldComp(props: Props) {
   );
 
   function renderRows(): JSX.Element[] {
-    return props.rows.map((row, rowIdx) => {
+    return game.field.rows.map((row, rowIdx) => {
       return (
         <tr key={'tr' + rowIdx}>
           {row.cells.map((cell, cellIdx) => {
@@ -28,7 +26,7 @@ export const FieldComp = observer(function FieldComp(props: Props) {
                   key={'cell' + cellIdx + rowIdx}
                   isActive={cell.active}
                   onClick={() => {
-                    props.onCellClick(cellIdx, rowIdx);
+                    game.onCellClick(cellIdx, rowIdx);
                   }}
                 />
               </td>
