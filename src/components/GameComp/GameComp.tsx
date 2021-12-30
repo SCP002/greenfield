@@ -31,7 +31,7 @@ export const GameComp = observer(function GameComp() {
           game.onFlipTargetCell(v);
         }}
         onColCtrlDown={() => {
-          game.setPrevColAmount(game.colAmount);
+          game.onColCtrlDown();
         }}
         onColCtrlUp={() => {
           game.onColCtrlUp();

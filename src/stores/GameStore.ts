@@ -14,11 +14,6 @@ export class GameStore {
   }
 
   @action
-  setPrevColAmount(v: number) {
-    this.prevColAmount = v;
-  }
-
-  @action
   setColAmount(v: number) {
     this.colAmount = v;
   }
@@ -64,6 +59,11 @@ export class GameStore {
     this.setFlipTargetCell(v);
     this.field.init(this.colAmount, this.rowAmount);
     this.resetSteps();
+  }
+
+  @action
+  onColCtrlDown() {
+    this.prevColAmount = this.colAmount;
   }
 
   @action
