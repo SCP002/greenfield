@@ -13,7 +13,7 @@ export const GameComp = observer(function GameComp() {
       <FieldComp
         rows={game.field.rows}
         onCellClick={(cellIdx: number, rowIdx: number) => {
-          game.handleCellClick(cellIdx, rowIdx);
+          game.onCellClick(cellIdx, rowIdx);
         }}
       />
       <MenuComp
@@ -25,9 +25,7 @@ export const GameComp = observer(function GameComp() {
           game.setColAmount(v);
         }}
         onRowAmount={(v) => {
-          game.setRowAmount(v);
-          game.field.init(game.colAmount, game.rowAmount);
-          game.resetSteps();
+          game.onRowAmount(v);
         }}
         onFlipTargetCell={(v) => {
           game.setFlipTargetCell(v);

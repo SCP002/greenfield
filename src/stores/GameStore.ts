@@ -44,11 +44,18 @@ export class GameStore {
   }
 
   @action
-  handleCellClick(cellIdx: number, rowIdx: number) {
+  onCellClick(cellIdx: number, rowIdx: number) {
     this.field.invertAreaState(cellIdx, rowIdx, this.flipTargetCell);
     this.addStep();
     if (this.field.isWin()) {
       window.alert(`You won in ${this.stepsAmount} steps!`);
     }
+  }
+
+  @action
+  onRowAmount(v: number) {
+    this.setRowAmount(v);
+    this.field.init(this.colAmount, this.rowAmount);
+    this.resetSteps();
   }
 }
