@@ -10,7 +10,7 @@ export const MenuComp = observer(function MenuComp() {
     window.alert(
       'Small puzzle game.\n' +
         'To win, mark all cells green.\n' +
-        'Click on the cell will revert colors of all neighbors except for diagonals.'
+        'Click on the cell will invert colors of all neighbors except for diagonals.'
     );
   }
 
