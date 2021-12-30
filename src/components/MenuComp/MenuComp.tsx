@@ -1,5 +1,4 @@
 import 'components/MenuComp/MenuComp.scoped.scss';
-import { observer } from 'mobx-react-lite';
 
 interface Props {
   flipTargetCell: boolean;
@@ -14,7 +13,7 @@ interface Props {
   onRandomize: () => void;
 }
 
-export const MenuComp = observer(function MenuComp(props: Props) {
+export function MenuComp(props: Props) {
   function showAbout() {
     window.alert(
       'Small puzzle game.\n' +
@@ -99,4 +98,4 @@ export const MenuComp = observer(function MenuComp(props: Props) {
       </div>
     </div>
   );
-});
+};
