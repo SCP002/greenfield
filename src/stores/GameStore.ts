@@ -19,29 +19,9 @@ export class GameStore {
   }
 
   @action
-  setRowAmount(v: number) {
-    this.rowAmount = v;
-  }
-
-  @action
-  setFlipTargetCell(v: boolean) {
-    this.flipTargetCell = v;
-  }
-
-  @action
-  addStep() {
-    this.stepsAmount++;
-  }
-
-  @action
-  resetSteps() {
-    this.stepsAmount = 0;
-  }
-
-  @action
   onCellClick(cellIdx: number, rowIdx: number) {
     this.field.invertAreaState(cellIdx, rowIdx, this.flipTargetCell);
-    this.addStep();
+    this.stepsAmount++;
     if (this.field.isWin()) {
       window.alert(`You won in ${this.stepsAmount} steps!`);
     }
@@ -49,16 +29,16 @@ export class GameStore {
 
   @action
   onRowAmount(v: number) {
-    this.setRowAmount(v);
+    this.rowAmount = v;
     this.field.init(this.colAmount, this.rowAmount);
-    this.resetSteps();
+    this.stepsAmount = 0;
   }
 
   @action
   onFlipTargetCell(v: boolean) {
-    this.setFlipTargetCell(v);
+    this.flipTargetCell = v;
     this.field.init(this.colAmount, this.rowAmount);
-    this.resetSteps();
+    this.stepsAmount = 0;
   }
 
   @action
@@ -72,12 +52,12 @@ export class GameStore {
       return;
     }
     this.field.init(this.colAmount, this.rowAmount);
-    this.resetSteps();
+    this.stepsAmount = 0;
   }
 
   @action
   onRandomize() {
     this.field.init(this.colAmount, this.rowAmount);
-    this.resetSteps();
+    this.stepsAmount = 0;
   }
 }
