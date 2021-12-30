@@ -1,5 +1,6 @@
 {
   "name": "greenfield",
+  "homepage": "https://scp002.github.io/greenfield",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -23,6 +24,8 @@
     "web-vitals": "^1.1.2"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "craco start",
     "serve": "craco build && serve -s build",
     "build": "craco build",
@@ -51,6 +54,7 @@
     "@types/lodash": "^4.14.177",
     "@typescript-eslint/parser": "^4.33.0",
     "eslint": "^7.32.0",
-    "eslint-plugin-mobx": "^0.0.7"
+    "eslint-plugin-mobx": "^0.0.7",
+    "gh-pages": "^3.2.3"
   }
 }
