@@ -20,6 +20,12 @@ npm start
 
 # Build for production with minification
 npm run build
+
+# Build & serve locally
+npm run serve
+
+# Deploy to github pages
+npm run deploy
 ```
 
 ## Notes
