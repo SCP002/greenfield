@@ -4,7 +4,7 @@ import { MenuComp } from 'components/MenuComp/MenuComp';
 
 export function GameComp() {
   return (
-    <div className={GameComp.name}>
+    <div className='GameComp'>
       <FieldComp />
       <MenuComp />
     </div>

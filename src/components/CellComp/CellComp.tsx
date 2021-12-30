@@ -8,7 +8,7 @@ interface Props {
 export function CellComp(props: Props) {
   return (
     <button
-      className={`${CellComp.name} ${props.isActive ? 'active' : ''}`}
+      className={`CellComp ${props.isActive ? 'active' : ''}`}
       onClick={() => {
         props.onClick();
       }}

@@ -19,7 +19,7 @@ export const MenuComp = observer(function MenuComp() {
   }
 
   return (
-    <div className={MenuComp.name}>
+    <div className='MenuComp'>
       <div>
         <p>steps counter: {game.stepsAmount}</p>
       </div>

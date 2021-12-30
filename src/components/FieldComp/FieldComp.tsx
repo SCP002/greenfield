@@ -8,7 +8,7 @@ export const FieldComp = observer(function FieldComp() {
   const game = useContext(StoresContext).game;
 
   return (
-    <div className={FieldComp.name}>
+    <div className='FieldComp'>
       <table>
         <tbody>{renderRows()}</tbody>
       </table>
