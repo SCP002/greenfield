@@ -1,19 +1,11 @@
 import 'components/MenuComp/MenuComp.scoped.scss';
+import { StoresContext } from 'index';
+import { observer } from 'mobx-react-lite';
+import { useContext } from 'react';
 
-interface Props {
-  flipTargetCell: boolean;
-  colAmount: number;
-  rowAmount: number;
-  stepsAmount: number;
-  onFlipTargetCell: (v: boolean) => void;
-  onColAmount: (v: number) => void;
-  onRowAmount: (v: number) => void;
-  onColCtrlDown: () => void;
-  onColCtrlUp: () => void;
-  onRandomize: () => void;
-}
+export const MenuComp = observer(function MenuComp() {
+  const game = useContext(StoresContext).game;
 
-export function MenuComp(props: Props) {
   function showAbout() {
     window.alert(
       'Small puzzle game.\n' +
@@ -29,12 +21,12 @@ export function MenuComp(props: Props) {
   return (
     <div className={MenuComp.name}>
       <div>
-        <p>steps counter: {props.stepsAmount}</p>
+        <p>steps counter: {game.stepsAmount}</p>
       </div>
 
       <div>
         <p>
-          field size: {props.rowAmount} x {props.colAmount}
+          field size: {game.rowAmount} x {game.colAmount}
         </p>
         <label>
           rows:
@@ -43,9 +35,9 @@ export function MenuComp(props: Props) {
             min="1"
             max="9"
             step="1"
-            value={props.rowAmount}
+            value={game.rowAmount}
             onChange={(evt) => {
-              props.onRowAmount(evt.target.valueAsNumber);
+              game.onRowAmount(evt.target.valueAsNumber);
             }}
           />
         </label>
@@ -56,20 +48,24 @@ export function MenuComp(props: Props) {
             min="1"
             max="9"
             step="1"
-            value={props.colAmount}
+            value={game.colAmount}
             onChange={(evt) => {
-              props.onColAmount(evt.target.valueAsNumber);
+              game.setColAmount(evt.target.valueAsNumber);
             }}
-            onMouseDown={props.onColCtrlDown}
-            onMouseUp={props.onColCtrlUp}
+            onMouseDown={() => {
+              game.onColCtrlDown();
+            }}
+            onMouseUp={() => {
+              game.onColCtrlUp();
+            }}
             onKeyDown={(evt) => {
               if (isArrowEvent(evt)) {
-                props.onColCtrlDown();
+                game.onColCtrlDown();
               }
             }}
             onKeyUp={(evt) => {
               if (isArrowEvent(evt)) {
-                props.onColCtrlUp();
+                game.onColCtrlUp();
               }
             }}
           />
@@ -81,16 +77,22 @@ export function MenuComp(props: Props) {
           change clicked cell:
           <input
             type="checkbox"
-            checked={props.flipTargetCell}
+            checked={game.flipTargetCell}
             onChange={(evt) => {
-              props.onFlipTargetCell(evt.target.checked);
+              game.onFlipTargetCell(evt.target.checked);
             }}
           />
         </label>
       </div>
 
       <div>
-        <button onClick={props.onRandomize}>randomize field</button>
+        <button
+          onClick={() => {
+            game.onRandomize();
+          }}
+        >
+          randomize field
+        </button>
       </div>
 
       <div>
@@ -98,4 +100,4 @@ export function MenuComp(props: Props) {
       </div>
     </div>
   );
-};
+});
