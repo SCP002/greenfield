@@ -34,11 +34,7 @@ export const GameComp = observer(function GameComp() {
           game.setPrevColAmount(game.colAmount);
         }}
         onColCtrlUp={() => {
-          if (game.colAmount === game.prevColAmount) {
-            return;
-          }
-          game.field.init(game.colAmount, game.rowAmount);
-          game.resetSteps();
+          game.onColCtrlUp();
         }}
         onRandomize={() => {
           game.field.init(game.colAmount, game.rowAmount);

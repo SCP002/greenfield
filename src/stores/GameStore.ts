@@ -65,4 +65,13 @@ export class GameStore {
     this.field.init(this.colAmount, this.rowAmount);
     this.resetSteps();
   }
+
+  @action
+  onColCtrlUp() {
+    if (this.colAmount === this.prevColAmount) {
+      return;
+    }
+    this.field.init(this.colAmount, this.rowAmount);
+    this.resetSteps();
+  }
 }
