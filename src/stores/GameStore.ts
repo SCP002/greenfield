@@ -74,4 +74,10 @@ export class GameStore {
     this.field.init(this.colAmount, this.rowAmount);
     this.resetSteps();
   }
+
+  @action
+  onRandomize() {
+    this.field.init(this.colAmount, this.rowAmount);
+    this.resetSteps();
+  }
 }
