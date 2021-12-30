@@ -58,4 +58,11 @@ export class GameStore {
     this.field.init(this.colAmount, this.rowAmount);
     this.resetSteps();
   }
+
+  @action
+  onFlipTargetCell(v: boolean) {
+    this.setFlipTargetCell(v);
+    this.field.init(this.colAmount, this.rowAmount);
+    this.resetSteps();
+  }
 }
