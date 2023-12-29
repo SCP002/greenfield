@@ -58,6 +58,9 @@ export const MenuComp = observer(function MenuComp() {
             onMouseUp={() => {
               game.onColCtrlUp();
             }}
+            onTouchEndCapture={() => {
+              game.onColCtrlUp();
+            }}
             onKeyDown={(evt) => {
               if (isArrowEvent(evt)) {
                 game.onColCtrlDown();
