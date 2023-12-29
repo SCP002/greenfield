@@ -52,8 +52,12 @@ export const MenuComp = observer(function MenuComp() {
             onChange={(evt) => {
               game.setColAmount(evt.target.valueAsNumber);
             }}
-            onMouseDown={game.onColCtrlDown}
-            onMouseUp={game.onColCtrlUp}
+            onMouseDown={() => {
+              game.onColCtrlDown();
+            }}
+            onMouseUp={() => {
+              game.onColCtrlUp();
+            }}
             onKeyDown={(evt) => {
               if (isArrowEvent(evt)) {
                 game.onColCtrlDown();
@@ -83,7 +87,9 @@ export const MenuComp = observer(function MenuComp() {
 
       <div>
         <button
-          onClick={game.onRandomize}
+          onClick={() => {
+            game.onRandomize();
+          }}
         >
           randomize field
         </button>
